@@ -11,3 +11,5 @@ exports.getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email: email } });
   return user;
 };
+
+exports.getUserById = async (id) => User.findByPK(id);

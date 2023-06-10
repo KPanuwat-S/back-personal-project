@@ -17,7 +17,7 @@ exports.register = async (req, res, next) => {
 
     // if the request's format is valid, then check if the account already exist in db
     const isUserExist = await userService.checkEmailExist(value.email);
-    if (isUserExist) createErorr("Email address already in use"); // throw error
+    if (isUserExist) createErorr("Email address already in use"); // throw err
 
     value.password = await bcryptService.hash(value.password);
     const user = await userService.createUser(value);
@@ -46,8 +46,12 @@ exports.login = async (req, res, next) => {
     if (!isCorrect) createError("Invalid Credential");
     const accessToken = tokenService.sign({ id: user.id });
     res.status(200).json({ accessToken });
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
+};
+
+exports.getMe = (req, res, next) => {
+  res.status(200).json({ user: req.user });
 };
 // READ
