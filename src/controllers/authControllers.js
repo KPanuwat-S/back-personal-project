@@ -8,7 +8,7 @@ const {
 } = require("../validators/authValidator");
 const userService = require("../services/userService");
 const createError = require("../utils/createError");
-const { token } = require("morgan");
+// const { token } = require("morgan");
 // CREATE
 exports.register = async (req, res, next) => {
   try {
@@ -52,6 +52,7 @@ exports.login = async (req, res, next) => {
 };
 
 exports.getMe = (req, res, next) => {
+  console.log("getMe", req);
   res.status(200).json({ user: req.user });
 };
 // READ

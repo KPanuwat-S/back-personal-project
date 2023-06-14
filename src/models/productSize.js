@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const ProductSize = sequelize.define(
     "ProductSize",
     {},
-    { underscored: true }
+    { underscored: true, timestamps: false }
   );
   ProductSize.associate = (models) => {
     ProductSize.belongsTo(models.Size, {

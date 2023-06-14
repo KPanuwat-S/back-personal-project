@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const CartItem = sequelize.define(
-    "CartItem",
+  const CartItem2 = sequelize.define(
+    "CartItem2",
     {
       quantity: {
         type: DataTypes.INTEGER,
@@ -44,21 +44,14 @@ module.exports = (sequelize, DataTypes) => {
 
     { underscored: true }
   );
-  CartItem.associate = (models) => {
-    CartItem.belongsTo(models.User, {
+  CartItem2.associate = (models) => {
+    CartItem2.belongsTo(models.User, {
       foreignKey: {
         name: "userId",
         allowNull: false,
       },
       onDelete: "RESTRICT",
     });
-    // CartItem.belongsTo(models.ProductItem, {
-    //   foreignKey: {
-    //     name: "productItemId",
-    //     allowNull: false,
-    //   },
-    //   onDelete: "RESTRICT",
-    // });
   };
-  return CartItem;
+  return CartItem2;
 };

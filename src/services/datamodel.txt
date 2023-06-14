@@ -1,0 +1,297 @@
+
+  //   {
+  //     "id": 1,
+  //     "name": "basic t-shirt",
+  //     "description": "Loose-fit T-shirt made of compact cotton. Round neck and short sleeves.",
+  //     "discount": "0",
+  //     "price": "550",
+  //     "createdAt": "2023-05-01T00:00:00.000Z",
+  //     "updatedAt": "2023-05-01T00:00:00.000Z",
+  //     "categoryId": 1,
+  //     "genderId": 1,
+  //     "ProductItems": [
+  //         {
+  //             "id": 18,
+  //             "stockQuantity": 100,
+  //             "createdAt": "2023-05-01T00:00:00.000Z",
+  //             "updatedAt": "2023-05-01T00:00:00.000Z",
+  //             "productColorId": 1,
+  //             "productModelId": 1,
+  //             "productSizeId": 4,
+  //             "ProductColor": {
+  //                 "id": 1,
+  //                 "colorId": 1,
+  //                 "productModelId": 1,
+  //                 "ProductImgs": [
+  //                     {
+  //                         "id": 1,
+  //                         "imgId": 1,
+  //                         "productColorId": 1,
+  //                         "Img": {
+  //                             "id": 1,
+  //                             "imagAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_1_1_1.jpg?ts=1675764461618"
+  //                         }
+  //                     }
+  //                 ]
+  //             }
+  //         },
+  //         {
+  //             "id": 3,
+  //             "stockQuantity": 100,
+  //             "createdAt": "2023-05-01T00:00:00.000Z",
+  //             "updatedAt": "2023-05-01T00:00:00.000Z",
+  //             "productColorId": 1,
+  //             "productModelId": 1,
+  //             "productSizeId": 3,
+  //             "ProductColor": {
+  //                 "id": 1,
+  //                 "colorId": 1,
+  //                 "productModelId": 1,
+  //                 "ProductImgs": [
+  //                     {
+  //                         "id": 1,
+  //                         "imgId": 1,
+  //                         "productColorId": 1,
+  //                         "Img": {
+  //                             "id": 1,
+  //                             "imagAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_1_1_1.jpg?ts=1675764461618"
+  //                         }
+  //                     }
+  //                 ]
+  //             }
+  //         },
+  //         {
+  //             "id": 2,
+  //             "stockQuantity": 100,
+  //             "createdAt": "2023-05-01T00:00:00.000Z",
+  //             "updatedAt": "2023-05-01T00:00:00.000Z",
+  //             "productColorId": 1,
+  //             "productModelId": 1,
+  //             "productSizeId": 2,
+  //             "ProductColor": {
+  //                 "id": 1,
+  //                 "colorId": 1,
+  //                 "productModelId": 1,
+  //                 "ProductImgs": [
+  //                     {
+  //                         "id": 1,
+  //                         "imgId": 1,
+  //                         "productColorId": 1,
+  //                         "Img": {
+  //                             "id": 1,
+  //                             "imagAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_1_1_1.jpg?ts=1675764461618"
+  //                         }
+  //                     }
+  //                 ]
+  //             }
+  //         },
+  //         {
+  //             "id": 1,
+  //             "stockQuantity": 100,
+  //             "createdAt": "2023-05-01T00:00:00.000Z",
+  //             "updatedAt": "2023-05-01T00:00:00.000Z",
+  //             "productColorId": 1,
+  //             "productModelId": 1,
+  //             "productSizeId": 1,
+  //             "ProductColor": {
+  //                 "id": 1,
+  //                 "colorId": 1,
+  //                 "productModelId": 1,
+  //                 "ProductImgs": [
+  //                     {
+  //                         "id": 1,
+  //                         "imgId": 1,
+  //                         "productColorId": 1,
+  //                         "Img": {
+  //                             "id": 1,
+  //                             "imagAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_1_1_1.jpg?ts=1675764461618"
+  //                         }
+  //                     }
+  //                 ]
+  //             }
+  //         }
+  //     ]
+  // }
+
+
+id:
+colorId:
+name": "basic t-shirt",
+description: "Loose-fit T-shirt made of compact cotton. Round neck and short sleeves.",
+discount: "0",
+price: "550",
+createdAt: "2023-05-01T00:00:00.000Z",
+categoryId": 1,
+genderId": 1
+imgs: ProductImgs.map(el => el.Img.imgAddress)
+sizes: ProductItems.map(el=>el.productSizeId)
+  {
+    "productDetail": [
+        {
+            "id": 1,
+            "colorId": 1,
+            "productModelId": 1,
+            "ProductModel": {
+                "id": 1,
+                "name": "basic t-shirt",
+                "description": "Loose-fit T-shirt made of compact cotton. Round neck and short sleeves.",
+                "discount": "0",
+                "price": "550",
+                "createdAt": "2023-05-01T00:00:00.000Z",
+                "updatedAt": "2023-05-01T00:00:00.000Z",
+                "categoryId": 1,
+                "genderId": 1
+            },
+            "ProductImgs": [
+                {
+                    "id": 5,
+                    "imgId": 3,
+                    "productColorId": 1,
+                    "Img": {
+                        "id": 3,
+                        "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_2_2_1.jpg?ts=1675764092379"
+                    }
+                },
+                {
+                    "id": 2,
+                    "imgId": 2,
+                    "productColorId": 1,
+                    "Img": {
+                        "id": 2,
+                        "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_2_1_1.jpg?ts=1675764090231"
+                    }
+                },
+                {
+                    "id": 1,
+                    "imgId": 1,
+                    "productColorId": 1,
+                    "Img": {
+                        "id": 1,
+                        "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/800/2/w/1126/1887411800_1_1_1.jpg?ts=1675764461618"
+                    }
+                }
+            ],
+            "ProductItems": [
+                {
+                    "id": 18,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 1,
+                    "productModelId": 1,
+                    "productSizeId": 4
+                },
+                {
+                    "id": 3,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 1,
+                    "productModelId": 1,
+                    "productSizeId": 3
+                },
+                {
+                    "id": 2,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 1,
+                    "productModelId": 1,
+                    "productSizeId": 2
+                },
+                {
+                    "id": 1,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 1,
+                    "productModelId": 1,
+                    "productSizeId": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "colorId": 2,
+            "productModelId": 1,
+            "ProductModel": {
+                "id": 1,
+                "name": "basic t-shirt",
+                "description": "Loose-fit T-shirt made of compact cotton. Round neck and short sleeves.",
+                "discount": "0",
+                "price": "550",
+                "createdAt": "2023-05-01T00:00:00.000Z",
+                "updatedAt": "2023-05-01T00:00:00.000Z",
+                "categoryId": 1,
+                "genderId": 1
+            },
+            "ProductImgs": [
+                {
+                    "id": 8,
+                    "imgId": 6,
+                    "productColorId": 2,
+                    "Img": {
+                        "id": 6,
+                        "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/250/2/w/1126/1887411250_2_2_1.jpg?ts=1675764549921"
+                    }
+                },
+                {
+                    "id": 7,
+                    "imgId": 5,
+                    "productColorId": 2,
+                    "Img": {
+                        "id": 5,
+                        "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/250/2/w/1126/1887411250_2_1_1.jpg?ts=1675764550254"
+                    }
+                },
+                {
+                    "id": 6,
+                    "imgId": 4,
+                    "productColorId": 2,
+                    "Img": {
+                        "id": 4,
+                        "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/250/2/w/1126/1887411250_1_1_1.jpg?ts=1675764547320"
+                    }
+                }
+            ],
+            "ProductItems": [
+                {
+                    "id": 22,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 2,
+                    "productModelId": 1,
+                    "productSizeId": 4
+                },
+                {
+                    "id": 21,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 2,
+                    "productModelId": 1,
+                    "productSizeId": 3
+                },
+                {
+                    "id": 20,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 2,
+                    "productModelId": 1,
+                    "productSizeId": 2
+                },
+                {
+                    "id": 19,
+                    "stockQuantity": 100,
+                    "createdAt": "2023-05-01T00:00:00.000Z",
+                    "updatedAt": "2023-05-01T00:00:00.000Z",
+                    "productColorId": 2,
+                    "productModelId": 1,
+                    "productSizeId": 1
+                }
+            ]
+        }
+    ]
+}

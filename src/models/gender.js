@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    { underscored: true }
+    { underscored: true, timestamps: false }
   );
   Gender.assocaite = (models) => {
     Gender.hasMany(models.ProductModel, {

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    { underscored: true }
+    { underscored: true, timestamps: false }
   );
   Size.associate = (models) => {
     Size.hasMany(models.ProductSize, {

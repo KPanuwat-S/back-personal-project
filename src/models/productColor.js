@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const ProductColor = sequelize.define(
     "ProductColor",
     {},
-    { underscored: true }
+    { underscored: true, timestamps: false }
   );
   ProductColor.associate = (models) => {
     ProductColor.belongsTo(models.ProductModel, {

@@ -12,4 +12,8 @@ exports.getUserByEmail = async (email) => {
   return user;
 };
 
-exports.getUserById = async (id) => User.findByPK(id);
+exports.getUserById = async (id) => {
+  const user = await User.findByPk(id);
+  console.log("get user by id");
+  return user;
+};
