@@ -21,6 +21,7 @@ exports.register = async (req, res, next) => {
 
     value.password = await bcryptService.hash(value.password);
     const user = await userService.createUser(value);
+    console.log("value", value);
     const accessToken = tokenService.sign({ id: user.id });
     res.status(200).json({ accessToken });
   } catch (err) {

@@ -1,4 +1,5 @@
-const { Model } = require("sequelize");
+const { Op } = require("sequelize");
+
 const {
   ProductModel,
   ProductItem,
@@ -24,6 +25,7 @@ exports.getProductColors = async (productModelId) => {
 exports.getProductGender = async (productModelId) => {
   const productGender = await ProductModel.findAll({
     where: { productModelId: productModelId },
+
     include: Gender,
   });
   return productGender;
@@ -158,7 +160,7 @@ exports.getProductDetail = async (productModelId) => {
         model: ProductModel,
       },
       { model: ProductImg, include: Img },
-      { model: ProductItem },
+      { model: ProductItem, include: ProductSize },
     ],
   });
 
@@ -174,10 +176,23 @@ exports.getProductDetail = async (productModelId) => {
       categoryId: el.ProductModel.categoryId,
       genderId: el.ProductModel.genderId,
       imgs: el.ProductImgs.map((el) => el.Img.imgAddress),
-      sizes: el.ProductItems.map((el) => el.productSizeId),
+      sizes: el.ProductItems.map((el) => el.ProductSize.sizeId),
+      productItemId: el.ProductItems.map((el) => el.id),
     };
     return productDetailObject;
   });
   // return productDetail;
   return transformProductDetail;
+};
+
+exports.getProductItemId = async (modelId, colorId, sizeId) => {
+  const productItemId = await ProductItem.findOne({
+    include: { model: ProductColor, where: { colorId: colorId } },
+    where: {
+      [Op.and]: [{ productModelId: modelId }, { productSizeId: sizeId }],
+    },
+  });
+
+  console.log(productItemId);
+  return productItemId.id;
 };

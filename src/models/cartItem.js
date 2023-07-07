@@ -8,40 +8,15 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
-    },
-    {
-      name: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: true,
-        },
+      sizeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      colorId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
     },
-    {
-      color: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: true,
-        },
-      },
-    },
-    {
-      price: {
-        type: DataTypes.DECIMAL,
-        validate: {
-          notEmpty: true,
-        },
-      },
-    },
-    {
-      SIZE: {
-        type: DataTypes.STRING,
-        validate: {
-          notEmpty: true,
-        },
-      },
-    },
-
     { underscored: true }
   );
   CartItem.associate = (models) => {
@@ -52,13 +27,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: "RESTRICT",
     });
-    // CartItem.belongsTo(models.ProductItem, {
-    //   foreignKey: {
-    //     name: "productItemId",
-    //     allowNull: false,
-    //   },
-    //   onDelete: "RESTRICT",
-    // });
+    CartItem.belongsTo(models.ProductItem, {
+      foreignKey: {
+        name: "productItemId",
+        allowNull: false,
+      },
+      onDelete: "RESTRICT",
+    });
   };
   return CartItem;
 };

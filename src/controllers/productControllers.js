@@ -54,7 +54,6 @@ exports.getProductCategory = async (req, res, next) => {
 
 exports.getProductDetail = async (req, res, next) => {
   const { productModelId } = req.params;
-  const { colorId } = req.query;
   try {
     const productDetail = await productService.getProductDetail(productModelId);
     res.status(200).json({ productDetail });
@@ -63,6 +62,21 @@ exports.getProductDetail = async (req, res, next) => {
   }
 };
 
-exports.addItemTocart = async (req,res,next)=>{
-  const {}=req.body
-}
+// exports.addItemTocart = async (req,res,next)=>{
+//   const {}=req.body
+// }
+
+exports.getProductItem = async (req, res, next) => {
+  const { modelId, colorId, sizeId } = req.query;
+  console.log("query", req.query);
+  try {
+    const productItemId = await productService.getProductItemId(
+      modelId,
+      colorId,
+      sizeId
+    );
+    res.status(200).json({ id: productItemId });
+  } catch (err) {
+    next(err);
+  }
+};

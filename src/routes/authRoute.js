@@ -8,3 +8,4 @@ router.post("/createAdress", authController.createUserAddress);
 router.post("/login", authController.login);
 router.get("/me", authenticatedMiddleware, authController.getMe);
 module.exports = router;
+ 

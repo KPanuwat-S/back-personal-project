@@ -9,6 +9,8 @@ const authRoute = require("./routes/authRoute");
 const productRoute = require("./routes/productRoute");
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error");
+const cartRoute = require("./routes/cartRoute");
+const authenticatedMiddleware = require("./middlewares/authenticate");
 // const authRoute = require("./routes/auth-route");
 // const userRoute = require("./routes/user-route");
 if (process.env.NODE_ENV === "development") {
@@ -29,6 +31,7 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/products", productRoute);
+app.use("/carts", authenticatedMiddleware, cartRoute);
 
 // app.use("/users", userRoute);
 
