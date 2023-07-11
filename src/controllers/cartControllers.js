@@ -1,7 +1,6 @@
 const cartService = require("../services/cartService");
 
 exports.addItemToCart = async (req, res, next) => {
-
   try {
     const user = req.user;
     const { productModelId, colorId, sizeId, quantity } = req.body;
@@ -9,12 +8,12 @@ exports.addItemToCart = async (req, res, next) => {
       productModelId,
       colorId
     );
-    console.log("---product color", productColorId.id);
+
     const productSizeId = await cartService.findProductSizeId(
       productModelId,
       sizeId
     );
-    console.log("---product size", productSizeId.id);
+
     const productItemId = await cartService.findItemById(
       productModelId,
       productColorId.id,
@@ -48,6 +47,36 @@ exports.getItemFromCart = async (req, res, next) => {
 exports.updateItemFromCart = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const { productModelId, color, size, quantity } = req.body;
+    console.log("quantity", quantity);
+    const productColorId = await cartService.findProductColorId(
+      productModelId,
+      color
+    );
+
+    const productSizeId = await cartService.findProductSizeId(
+      productModelId,
+      size
+    );
+
+    const productItemId = await cartService.findItemById(
+      productModelId,
+      productColorId.id,
+      productSizeId.id
+    );
+
+    const itemToBeEdited = {
+      quantity,
+      productItemId: productItemId.id,
+      size,
+      color,
+    };
+
+    console.log("itemToBeEdited", itemToBeEdited);
+
+    const editedItem = await cartService.updateItemInCart(id, itemToBeEdited);
+    console.log("editedItem", editedItem);
+    res.status(200).json(editedItem);
   } catch (err) {
     next(err);
   }

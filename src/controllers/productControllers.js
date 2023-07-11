@@ -7,6 +7,8 @@
 // } = require("../models");
 const productService = require("../services/productService");
 
+
+
 exports.getAllProducts = async (req, res, next) => {
   try {
     const allProductModels = await productService.getAllProductModelforCard();
@@ -80,3 +82,27 @@ exports.getProductItem = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getMaleProduct = async (req, res, next) => {
+  const { genderId } = req.params;
+  const { categoryId } = req.query;
+  console.log("genderId", genderId);
+  let maleProduct;
+  try {
+    if (categoryId) {
+      maleProduct = await productService.getGenderedProductModelQuery(
+        genderId,
+        categoryId
+      );
+    } else {
+      maleProduct = await productService.getGenderedProductModelforCard(
+        genderId
+      );
+    }
+    res.status(200).json(maleProduct);
+  } catch (err) {
+    next(err);
+  }
+};
+
+

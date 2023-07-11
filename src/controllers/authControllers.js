@@ -13,15 +13,17 @@ const createError = require("../utils/createError");
 exports.register = async (req, res, next) => {
   try {
     // validate request from front end
-    const value = generalRegisterValidate(req.body);
-
+    // const value = generalRegisterValidate(req.body);
+    const value = req.body;
+    const { province } = req.body;
     // if the request's format is valid, then check if the account already exist in db
     const isUserExist = await userService.checkEmailExist(value.email);
-    if (isUserExist) createErorr("Email address already in use"); // throw err
-
+    if (isUserExist) createError("Email address already in use"); // throw err
     value.password = await bcryptService.hash(value.password);
     const user = await userService.createUser(value);
-    console.log("value", value);
+    if (province) {
+      const address = await userService.createUserAddress(user.id, req.body);
+    }
     const accessToken = tokenService.sign({ id: user.id });
     res.status(200).json({ accessToken });
   } catch (err) {
@@ -30,7 +32,15 @@ exports.register = async (req, res, next) => {
   }
 };
 
-exports.createUserAddress = (userAddress) => Address.create(userAddress);
+exports.createUserAddress = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const address = await userService.createUserAddress(user.id, req.body);
+    res.status(200).json(address);
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.login = async (req, res, next) => {
   try {

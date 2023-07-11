@@ -24,7 +24,7 @@ exports.getCartItem = async (id) => {
     include: {
       model: ProductItem,
       attributes: {
-        exclude: ["createdAt", "updatedAt", "stockQuantity", "productSizeId"],
+        exclude: ["createdAt", "updatedAt", "productSizeId"],
       },
       include: {
         model: ProductColor,
@@ -54,6 +54,7 @@ exports.getCartItem = async (id) => {
       imgs: el.ProductItem.ProductColor.ProductImgs.map(
         (el) => el.Img.imgAddress
       ),
+      stock: el.ProductItem.stockQuantity,
     };
   });
   // const img = await ProductModel.findOne({ where: {id:} });
@@ -75,6 +76,17 @@ exports.findItemById = async (productModelId, productColorId, productSizeId) =>
       productSizeId: productSizeId,
     },
   });
+
+exports.updateItemInCart = async (id, item) =>
+  await CartItem.update(
+    {
+      quantity: item.quantity,
+      productItemId: item.productItemId,
+      sizeId: item.size,
+      colorId: item.color,
+    },
+    { where: { id } }
+  );
 
 exports.deleteItemById = async (id) =>
   await CartItem.destroy({ where: { id } });

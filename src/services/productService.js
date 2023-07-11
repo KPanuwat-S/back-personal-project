@@ -14,6 +14,8 @@ const {
 } = require("../models");
 
 // Query
+
+// Read
 exports.getProductColors = async (productModelId) => {
   const productColors = await ProductColor.findAll({
     where: { productModelId: productModelId },
@@ -49,6 +51,10 @@ exports.getProductCategory = async (productModelId) => {
   return productCategory;
 };
 
+exports.getAllModelsforAdmin = async () => {
+  const allModels = await ProductModel.findAll();
+  return allModels;
+};
 // Data model for Card Item
 // data ={name:, pic:, color: [],price,gender:,category}
 exports.getAllProductModelforCard = async () => {
@@ -85,73 +91,111 @@ exports.getAllProductModelforCard = async () => {
         (el) => el.Img.imgAddress
       ),
     };
-    // "ProductItems": [
-    //   {
-    //       "id": 22,
-    //       "stockQuantity": 100,
-    //       "createdAt": "2023-05-01T00:00:00.000Z",
-    //       "updatedAt": "2023-05-01T00:00:00.000Z",
-    //       "productColorId": 2,
-    //       "productModelId": 1,
-    //       "productSizeId": 4,
-    //       "ProductColor": {
-    //           "id": 2,
-    //           "colorId": 2,
-    //           "productModelId": 1,
-    //           "ProductImgs": [
-    //               {
-    //                   "id": 8,
-    //                   "imgId": 6,
-    //                   "productColorId": 2,
-    //                   "Img": {
-    //                       "id": 6,
-    //                       "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/250/2/w/1126/1887411250_2_2_1.jpg?ts=1675764549921"
-    //                   }
-    //               },
-    //               {
-    //                   "id": 7,
-    //                   "imgId": 5,
-    //                   "productColorId": 2,
-    //                   "Img": {
-    //                       "id": 5,
-    //                       "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/250/2/w/1126/1887411250_2_1_1.jpg?ts=1675764550254"
-    //                   }
-    //               },
-    //               {
-    //                   "id": 6,
-    //                   "imgId": 4,
-    //                   "productColorId": 2,
-    //                   "Img": {
-    //                       "id": 4,
-    //                       "imgAddress": "https://static.zara.net/photos///2023/V/0/1/p/1887/411/250/2/w/1126/1887411250_1_1_1.jpg?ts=1675764547320"
-    //                   }
-    //               }
-    //           ]
-    //       }
-    //   },
-
     return productObject;
   });
 
   return transformedProductObject;
 };
 
-// Data model for product detail
+exports.getGenderedProductModelforCard = async (genderId) => {
+  // const productModelForCard = await ProductModel.findAll({
+  //   where: { genderId, categoryId },
+  //   include: [
+  //     {
+  //       model: ProductItem,
 
-// {
-//   "id": 1,
-//   "name": "basic t-shirt",
-//   "description": "Loose-fit T-shirt made of compact cotton. Round neck and short sleeves.",
-//   "discount": "0",
-//   "price": "550",
-//   "createdAt": "2023-05-01T00:00:00.000Z",
-//   "gender": 1,
-//   "category": 1,
-//   "color": 1,
-//   "size": []
-//   "imgs": []
-// }
-// where: {colorId: color}
+  //       include: [
+  //         {
+  //           model: ProductColor,
+  //           include: [{ model: ProductImg, include: Img }],
+  //           attibutes: ["ProductColor"],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // });
+
+  const productModelForCard = await ProductModel.findAll({
+    where: { genderId },
+    include: [
+      {
+        model: ProductItem,
+
+        include: [
+          {
+            model: ProductColor,
+            include: [{ model: ProductImg, include: Img }],
+            attibutes: ["ProductColor"],
+          },
+        ],
+      },
+    ],
+  });
+
+  const transformedProductObject = productModelForCard.map((el) => {
+    const colorArray = el.ProductItems.map((el) => el.ProductColor.colorId);
+    const uniqueColor = Array.from(new Set(colorArray));
+    const productObject = {
+      id: el.id,
+      name: el.name,
+      description: el.description,
+      discount: el.discount,
+      price: el.price,
+      createdAt: el.createdAt,
+      gender: el.genderId,
+      category: el.categoryId,
+      color: uniqueColor,
+      imgs: el.ProductItems[0].ProductColor.ProductImgs.map(
+        (el) => el.Img.imgAddress
+      ),
+    };
+    return productObject;
+  });
+
+  return transformedProductObject;
+};
+
+exports.getGenderedProductModelQuery = async (genderId, categoryId) => {
+  const productModelForCard = await ProductModel.findAll({
+    where: { genderId, categoryId },
+    include: [
+      {
+        model: ProductItem,
+
+        include: [
+          {
+            model: ProductColor,
+            include: [{ model: ProductImg, include: Img }],
+            attibutes: ["ProductColor"],
+          },
+        ],
+      },
+    ],
+  });
+
+  const transformedProductObject = productModelForCard.map((el) => {
+    const colorArray = el.ProductItems.map((el) => el.ProductColor.colorId);
+    const uniqueColor = Array.from(new Set(colorArray));
+    const productObject = {
+      id: el.id,
+      name: el.name,
+      description: el.description,
+      discount: el.discount,
+      price: el.price,
+      createdAt: el.createdAt,
+      gender: el.genderId,
+      category: el.categoryId,
+      color: uniqueColor,
+      imgs: el.ProductItems[0].ProductColor.ProductImgs.map(
+        (el) => el.Img.imgAddress
+      ),
+    };
+    return productObject;
+  });
+
+  return transformedProductObject;
+};
+
 exports.getProductDetail = async (productModelId) => {
   const productDetail = await ProductColor.findAll({
     where: { productModelId: productModelId },
@@ -178,6 +222,8 @@ exports.getProductDetail = async (productModelId) => {
       imgs: el.ProductImgs.map((el) => el.Img.imgAddress),
       sizes: el.ProductItems.map((el) => el.ProductSize.sizeId),
       productItemId: el.ProductItems.map((el) => el.id),
+      // stockQuantity: el.ProductItem.stockQuantity,
+      productModelId,
     };
     return productDetailObject;
   });
@@ -196,3 +242,30 @@ exports.getProductItemId = async (modelId, colorId, sizeId) => {
   console.log(productItemId);
   return productItemId.id;
 };
+
+// Create
+exports.createProductModel = async (data) => await ProductModel.create(data);
+exports.editProductModel = async (id, data) =>
+  await ProductModel.update(data, { where: { id } });
+
+exports.deleteProductModel = async (id) =>
+  await ProductModel.destroy({ where: { id } });
+
+exports.createProductSizes = async (bulkSize) =>
+  await ProductSize.bulkCreate(bulkSize);
+
+// Create Product Item
+
+exports.createImages = async (bulkImages) => await Img.bulkCreate(bulkImages);
+exports.createProductColor = async (productModelId, colorId) =>
+  await ProductColor.create({ productModelId, colorId });
+exports.createProductImg = async (bulkProductImg) =>
+  // imgId, productColorId
+  await ProductImg.bulkCreate(bulkProductImg);
+exports.createProductItem = async (bulkProductItem) =>
+  await ProductItem.bulkCreate(bulkProductItem);
+
+exports.findProductSizeId = async (productModelId) =>
+  await ProductSize.findAll({ where: { productModelId } });
+
+// Get Product Item

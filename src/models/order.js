@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define("Order", {}, { underscored: true });
 
@@ -20,9 +18,16 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "RESTRICT",
     });
 
-    Order.hasOne(models.Payment, {
+    // Order.hasOne(models.Payment, {
+    //   foreignKey: {
+    //     name: "paymentId",
+    //     allowNull: false,
+    //   },
+    //   onDelete: "RESTRICT",
+    // });
+    Order.belongsTo(models.User, {
       foreignKey: {
-        name: "paymentId",
+        name: "userId",
         allowNull: false,
       },
       onDelete: "RESTRICT",

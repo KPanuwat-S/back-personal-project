@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      sizeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      colorId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     { underscored: true }
   );
