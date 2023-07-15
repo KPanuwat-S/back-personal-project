@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         name: "productModelId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductModel.belongsTo(models.Gender, {
       foreignKey: {
@@ -61,14 +61,14 @@ module.exports = (sequelize, DataTypes) => {
         name: "productModelId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductModel.hasMany(models.ProductColor, {
       foreignKey: {
         name: "productModelId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   };
   return ProductModel;

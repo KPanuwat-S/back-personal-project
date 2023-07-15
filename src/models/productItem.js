@@ -18,42 +18,42 @@ module.exports = (sequelize, DataTypes) => {
         name: "productItemId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductItem.hasMany(models.Favorite, {
       foreignKey: {
         name: "productItemId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductItem.belongsTo(models.ProductModel, {
       foreignKey: {
         name: "productModelId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductItem.belongsTo(models.ProductColor, {
       foreignKey: {
         name: "productColorId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductItem.belongsTo(models.ProductSize, {
       foreignKey: {
         name: "productSizeId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductItem.hasMany(models.OrderItem, {
       foreignKey: {
         name: "productItemId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   };
   return ProductItem;

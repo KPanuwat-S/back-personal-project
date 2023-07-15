@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         name: "imgId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   return Img;
 };

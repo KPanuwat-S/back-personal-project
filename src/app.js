@@ -25,9 +25,10 @@ app.use(
     },
   })
 );
+app.use(express.urlencoded({ limit: "25mb", extended: true }));
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "25mb" }));
 
 app.use("/auth", authRoute);
 app.use("/products", productRoute);

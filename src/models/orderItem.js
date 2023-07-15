@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         name: "productItemId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
 
     OrderItem.hasMany(models.Order, {
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
         name: "orderItemId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   };
   return OrderItem;

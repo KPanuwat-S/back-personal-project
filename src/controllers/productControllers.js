@@ -1,12 +1,4 @@
-// const {
-//   ProductModel,
-//   ProductItem,
-//   ProductSize,
-//   ProductColor,
-//   Gender,
-// } = require("../models");
 const productService = require("../services/productService");
-
 
 
 exports.getAllProducts = async (req, res, next) => {
@@ -104,5 +96,3 @@ exports.getMaleProduct = async (req, res, next) => {
     next(err);
   }
 };
-
-

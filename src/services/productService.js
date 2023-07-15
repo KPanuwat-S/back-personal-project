@@ -52,8 +52,19 @@ exports.getProductCategory = async (productModelId) => {
 };
 
 exports.getAllModelsforAdmin = async () => {
-  const allModels = await ProductModel.findAll();
+  const allModels = await ProductModel.findAll({
+    include: Category,
+  });
   return allModels;
+};
+
+exports.getOneProductModel = async (id) => {
+  const model = await ProductModel.findOne({
+    where: { id },
+    include: Category,
+  });
+
+  return model;
 };
 // Data model for Card Item
 // data ={name:, pic:, color: [],price,gender:,category}
@@ -93,7 +104,7 @@ exports.getAllProductModelforCard = async () => {
     };
     return productObject;
   });
-
+  // return productModelForCard;
   return transformedProductObject;
 };
 
@@ -151,7 +162,7 @@ exports.getGenderedProductModelforCard = async (genderId) => {
     };
     return productObject;
   });
-
+  // return productModelForCard;
   return transformedProductObject;
 };
 
@@ -222,7 +233,9 @@ exports.getProductDetail = async (productModelId) => {
       imgs: el.ProductImgs.map((el) => el.Img.imgAddress),
       sizes: el.ProductItems.map((el) => el.ProductSize.sizeId),
       productItemId: el.ProductItems.map((el) => el.id),
-      // stockQuantity: el.ProductItem.stockQuantity,
+      stockQuantity: el.ProductItems.map((e) => {
+        return { id: e.ProductSize.sizeId, quantity: e.stockQuantity };
+      }),
       productModelId,
     };
     return productDetailObject;
@@ -245,11 +258,15 @@ exports.getProductItemId = async (modelId, colorId, sizeId) => {
 
 // Create
 exports.createProductModel = async (data) => await ProductModel.create(data);
+
 exports.editProductModel = async (id, data) =>
   await ProductModel.update(data, { where: { id } });
 
-exports.deleteProductModel = async (id) =>
+exports.deleteProductModel = async (id) => {
+  // await ProductSize.destroy({ where: { productModelId: id } });
+  // await ProductColor.destroy({ where: { productModelId: id } });
   await ProductModel.destroy({ where: { id } });
+};
 
 exports.createProductSizes = async (bulkSize) =>
   await ProductSize.bulkCreate(bulkSize);
@@ -268,4 +285,13 @@ exports.createProductItem = async (bulkProductItem) =>
 exports.findProductSizeId = async (productModelId) =>
   await ProductSize.findAll({ where: { productModelId } });
 
-// Get Product Item
+// Get Category
+exports.getCategories = async () => await Category.findAll({});
+
+// Update
+
+// Delete
+exports.deleteProductItemById = async (id, colorId) =>
+  await ProductColor.destroy({
+    where: { productModelId: id, colorId: colorId },
+  });

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         name: "sizeId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   };
   return Size;

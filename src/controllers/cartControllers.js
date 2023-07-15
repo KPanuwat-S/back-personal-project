@@ -34,6 +34,8 @@ exports.addItemToCart = async (req, res, next) => {
   }
 };
 
+
+
 exports.getItemFromCart = async (req, res, next) => {
   try {
     const user = req.user;

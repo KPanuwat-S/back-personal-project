@@ -67,3 +67,9 @@ exports.getMe = (req, res, next) => {
   res.status(200).json({ user: req.user });
 };
 // READ
+
+exports.getAddress = async (req, res, next) => {
+  const user = req.user;
+  const data = await userService.getAddress(user.id);
+  res.status(200).json(data);
+};

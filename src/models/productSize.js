@@ -17,14 +17,14 @@ module.exports = (sequelize, DataTypes) => {
         name: "productModelId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductSize.hasMany(models.ProductItem, {
       foreignKey: {
         name: "productSizeId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   };
   return ProductSize;

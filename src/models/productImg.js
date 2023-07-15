@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         name: "productColorId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
     ProductImg.belongsTo(models.Img, {
       foreignKey: {
         name: "imgId",
         allowNull: false,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
     });
   };
   return ProductImg;

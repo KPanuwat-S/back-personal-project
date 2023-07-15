@@ -26,3 +26,5 @@ exports.createUserAddress = (userId, userAddress) =>
     addressLine: userAddress.addressLine,
     userId,
   });
+
+exports.getAddress = (userId) => Address.findOne({ where: { userId } });
