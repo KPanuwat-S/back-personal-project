@@ -73,7 +73,6 @@ exports.getAllProductModelforCard = async () => {
     include: [
       {
         model: ProductItem,
-
         include: [
           {
             model: ProductColor,
@@ -98,7 +97,7 @@ exports.getAllProductModelforCard = async () => {
       gender: el.genderId,
       category: el.categoryId,
       color: uniqueColor,
-      imgs: el.ProductItems[0].ProductColor.ProductImgs.map(
+      imgs: el.ProductItems[0]?.ProductColor?.ProductImgs?.map(
         (el) => el.Img.imgAddress
       ),
     };
@@ -156,7 +155,7 @@ exports.getGenderedProductModelforCard = async (genderId) => {
       gender: el.genderId,
       category: el.categoryId,
       color: uniqueColor,
-      imgs: el.ProductItems[0].ProductColor.ProductImgs.map(
+      imgs: el.ProductItems[0]?.ProductColor?.ProductImgs?.map(
         (el) => el.Img.imgAddress
       ),
     };
@@ -197,7 +196,7 @@ exports.getGenderedProductModelQuery = async (genderId, categoryId) => {
       gender: el.genderId,
       category: el.categoryId,
       color: uniqueColor,
-      imgs: el.ProductItems[0].ProductColor.ProductImgs.map(
+      imgs: el.ProductItems[0]?.ProductColor?.ProductImgs?.map(
         (el) => el.Img.imgAddress
       ),
     };
@@ -230,10 +229,10 @@ exports.getProductDetail = async (productModelId) => {
       createdAt: el.ProductModel.createdAt,
       categoryId: el.ProductModel.categoryId,
       genderId: el.ProductModel.genderId,
-      imgs: el.ProductImgs.map((el) => el.Img.imgAddress),
-      sizes: el.ProductItems.map((el) => el.ProductSize.sizeId),
-      productItemId: el.ProductItems.map((el) => el.id),
-      stockQuantity: el.ProductItems.map((e) => {
+      imgs: el.ProductImgs?.map((el) => el.Img.imgAddress),
+      sizes: el.ProductItems?.map((el) => el.ProductSize.sizeId),
+      productItemId: el.ProductItems?.map((el) => el.id),
+      stockQuantity: el.ProductItems?.map((e) => {
         return { id: e.ProductSize.sizeId, quantity: e.stockQuantity };
       }),
       productModelId,
